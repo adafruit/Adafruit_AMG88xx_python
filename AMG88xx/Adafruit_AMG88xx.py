@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 import logging
+import bitfield
 
 # AMG88xx default address.
 AMG88xx_I2CADDR	= 0x69
@@ -71,23 +72,6 @@ AMG88xx_THERMISTOR_CONVERSION = .0625
 
 def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
-
-#simple bitfield object
-class AMG88_reg(object):
-    def __init__(self, _structure):
-        self._structure = _structure
-        
-        for key, value in _structure.iteritems():
-            setattr(self, key, 0)
-            
-    def get(self):
-        fullreg = 0
-        pos = 0
-        for key, value in self._structure.iteritems():
-            fullreg = fullreg | ( (getattr(self, key) & (2**value - 1)) << pos )
-            pos = pos + value
-            
-        return fullreg
 		
 
 class Adafruit_AMG88xx(object):
@@ -104,25 +88,25 @@ class Adafruit_AMG88xx(object):
 		self._device = i2c.get_i2c_device(address, **kwargs)
 
 		#set up the registers
-		self._pctl = AMG88_reg({'PCTL' : 8})
-		self._rst = AMG88_reg({'RST' : 8})
-		self._fpsc = AMG88_reg({'FPS' : 1})
-		self._intc = AMG88_reg({'INTEN' : 1, 'INTMOD' : 1})
-		self._stat = AMG88_reg({'unused' : 1, 'INTF' : 1, 'OVF_IRS' : 1, 'OVF_THS' : 1})
-		self._sclr = AMG88_reg({'unused' : 1, 'INTCLR' : 1, 'OVS_CLR' : 1, 'OVT_CLR' : 1})
-		self._ave = AMG88_reg({'unused' : 5, 'MAMOD' : 1})
+		self._pctl = bitfield({'PCTL' : 8})
+		self._rst = bitfield({'RST' : 8})
+		self._fpsc = bitfield({'FPS' : 1})
+		self._intc = bitfield({'INTEN' : 1, 'INTMOD' : 1})
+		self._stat = bitfield({'unused' : 1, 'INTF' : 1, 'OVF_IRS' : 1, 'OVF_THS' : 1})
+		self._sclr = bitfield({'unused' : 1, 'INTCLR' : 1, 'OVS_CLR' : 1, 'OVT_CLR' : 1})
+		self._ave = bitfield({'unused' : 5, 'MAMOD' : 1})
 
-		self._inthl = AMG88_reg({'INT_LVL_H' : 8})
-		self._inthh = AMG88_reg({'INT_LVL_H' : 4})
+		self._inthl = bitfield({'INT_LVL_H' : 8})
+		self._inthh = bitfield({'INT_LVL_H' : 4})
 
-		self._intll = AMG88_reg({'INT_LVL_H' : 8})
-		self._intlh = AMG88_reg({'INT_LVL_L' : 4})
+		self._intll = bitfield({'INT_LVL_H' : 8})
+		self._intlh = bitfield({'INT_LVL_L' : 4})
 
-		self._ihysl = AMG88_reg({'INT_HYS' : 8})
-		self._ihysh = AMG88_reg({'INT_HYS' : 4})
+		self._ihysl = bitfield({'INT_HYS' : 8})
+		self._ihysh = bitfield({'INT_HYS' : 4})
 
-		self._tthl = AMG88_reg({'TEMP':8})
-		self._tthh = AMG88_reg({'TEMP':3, 'SIGN':1})
+		self._tthl = bitfield({'TEMP':8})
+		self._tthh = bitfield({'TEMP':3, 'SIGN':1})
 
 		#enter normal mode
 		self._pctl.PCTL = self._mode

@@ -22,7 +22,7 @@ os.putenv('SDL_FBDEV', '/dev/fb1')
 pygame.init()
 
 #initialize the sensor
-sensor = Adafruit_AMG88xx(address=0x68)
+sensor = Adafruit_AMG88xx()
 
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]

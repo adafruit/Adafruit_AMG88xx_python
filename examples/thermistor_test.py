@@ -24,7 +24,7 @@
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 
-import Adafruit_AMG88xx
+from Adafruit_AMG88xx import Adafruit_AMG88xx
 
 #import Adafruit_AMG88xx.Adafruit_AMG88xx as AMG88
 

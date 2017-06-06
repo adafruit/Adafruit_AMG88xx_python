@@ -18,7 +18,7 @@ classifiers = ['Development Status :: 4 - Beta',
                'Topic :: System :: Hardware']
 
 setup(name              = 'Adafruit_AMG88xx',
-      version           = '1.0',
+      version           = '1.2',
       author            = 'Dean Miller',
       author_email      = 'dean@adafruit.com',
       description       = 'Python library to use the AMG88xx Grid-EYE 8x8 thermal sensor with raspberry pi or other linux boards.',
@@ -26,5 +26,5 @@ setup(name              = 'Adafruit_AMG88xx',
       classifiers       = classifiers,
       url               = 'https://github.com/adafruit/Adafruit_AMG88xx_python/',
       dependency_links  = ['https://github.com/adafruit/Adafruit_Python_GPIO/tarball/master#egg=Adafruit-GPIO-0.6.5'],
-      install_requires  = ['Adafruit-GPIO>=0.6.5', 'Adafruit-bitfield>=1.0'],
+      install_requires  = ['Adafruit-GPIO>=0.6.5', 'Adafruit-bitfield>=1.3'],
       packages          = find_packages())

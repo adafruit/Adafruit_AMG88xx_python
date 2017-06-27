@@ -88,25 +88,25 @@ class Adafruit_AMG88xx(object):
 		self._device = i2c.get_i2c_device(address, **kwargs)
 
 		#set up the registers
-		self._pctl = Adafruit_bitfield({'PCTL' : 8})
-		self._rst = Adafruit_bitfield({'RST' : 8})
-		self._fpsc = Adafruit_bitfield({'FPS' : 1})
-		self._intc = Adafruit_bitfield({'INTEN' : 1, 'INTMOD' : 1})
-		self._stat = Adafruit_bitfield({'unused' : 1, 'INTF' : 1, 'OVF_IRS' : 1, 'OVF_THS' : 1})
-		self._sclr = Adafruit_bitfield({'unused' : 1, 'INTCLR' : 1, 'OVS_CLR' : 1, 'OVT_CLR' : 1})
-		self._ave = Adafruit_bitfield({'unused' : 5, 'MAMOD' : 1})
+		self._pctl = Adafruit_bitfield([('PCTL', 8)])
+		self._rst = Adafruit_bitfield([('RST', 8)])
+		self._fpsc = Adafruit_bitfield([('FPS', 1)])
+		self._intc = Adafruit_bitfield([('INTEN', 1), ('INTMOD', 1)])
+		self._stat = Adafruit_bitfield([('unused', 1), ('INTF', 1), ('OVF_IRS', 1), ('OVF_THS', 1)])
+		self._sclr = Adafruit_bitfield([('unused', 1), ('INTCLR', 1), ('OVS_CLR', 1), ('OVT_CLR', 1)])
+		self._ave = Adafruit_bitfield([('unused', 5), ('MAMOD', 1)])
 
-		self._inthl = Adafruit_bitfield({'INT_LVL_H' : 8})
-		self._inthh = Adafruit_bitfield({'INT_LVL_H' : 4})
+		self._inthl = Adafruit_bitfield([('INT_LVL_H', 8)])
+		self._inthh = Adafruit_bitfield([('INT_LVL_H', 4)])
 
-		self._intll = Adafruit_bitfield({'INT_LVL_H' : 8})
-		self._intlh = Adafruit_bitfield({'INT_LVL_L' : 4})
+		self._intll = Adafruit_bitfield([('INT_LVL_H', 8)])
+		self._intlh = Adafruit_bitfield([('INT_LVL_L', 4)])
 
-		self._ihysl = Adafruit_bitfield({'INT_HYS' : 8})
-		self._ihysh = Adafruit_bitfield({'INT_HYS' : 4})
+		self._ihysl = Adafruit_bitfield([('INT_HYS', 8)])
+		self._ihysh = Adafruit_bitfield([('INT_HYS', 4)])
 
-		self._tthl = Adafruit_bitfield({'TEMP':8})
-		self._tthh = Adafruit_bitfield({'TEMP':3, 'SIGN':1})
+		self._tthl = Adafruit_bitfield([('TEMP', 8)])
+		self._tthh = Adafruit_bitfield([('TEMP',3), ('SIGN',1)])
 
 		#enter normal mode
 		self._pctl.PCTL = self._mode

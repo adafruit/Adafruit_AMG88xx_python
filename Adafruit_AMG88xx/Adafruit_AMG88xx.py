@@ -129,21 +129,22 @@ class Adafruit_AMG88xx(object):
 
 	def setInterruptLevels(self, high, low, hysteresis):
 
-		highConv = high / AMG88xx_PIXEL_TEMP_CONVERSION
+		highConv = int(high / AMG88xx_PIXEL_TEMP_CONVERSION)
 		highConv = constrain(highConv, -4095, 4095)
 		self._inthl.INT_LVL_H = highConv & 0xFF
+
 		self._inthh.INT_LVL_H = (highConv & 0xF) >> 4
 		self._device.write8(AMG88xx_INTHL, self._inthl.get())
 		self._device.write8(AMG88xx_INTHH, self._inthh.get())
 
-		lowConv = low / AMG88xx_PIXEL_TEMP_CONVERSION
+		lowConv = int(low / AMG88xx_PIXEL_TEMP_CONVERSION)
 		lowConv = constrain(lowConv, -4095, 4095)
 		self._intll.INT_LVL_L = lowConv & 0xFF
 		self._intlh.INT_LVL_L = (lowConv & 0xF) >> 4
 		self._device.write8(AMG88xx_INTLL, self._intll.get())
 		self._device.write8(AMG88xx_INTLH, self._intlh.get())
 
-		hysConv = hysteresis / AMG88xx_PIXEL_TEMP_CONVERSION
+		hysConv = int(hysteresis / AMG88xx_PIXEL_TEMP_CONVERSION)
 		hysConv = constrain(hysConv, -4095, 4095)
 		self._ihysl.INT_HYS = hysConv & 0xFF
 		self._ihysh.INT_HYS = (hysConv & 0xF) >> 4
@@ -172,7 +173,7 @@ class Adafruit_AMG88xx(object):
 	def getInterrupt(self):
 		buf = []
 		for i in range(0, 8):
-			buf.append(self._device.read8(AMG88xx_INT_OFFSET + i))
+			buf.append(self._device.readU8(AMG88xx_INT_OFFSET + i))
 			
 		return buf
 

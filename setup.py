@@ -26,5 +26,5 @@ setup(name              = 'Adafruit_AMG88xx',
       classifiers       = classifiers,
       url               = 'https://github.com/adafruit/Adafruit_AMG88xx_python/',
       dependency_links  = ['https://github.com/adafruit/Adafruit_Python_GPIO/tarball/master#egg=Adafruit-GPIO-0.6.5'],
-      install_requires  = ['Adafruit-GPIO>=0.6.5', 'Adafruit-bitfield>=1.4'],
+      install_requires  = ['Adafruit-GPIO>=0.6.5', 'Adafruit-bitfield>=1.5.1'],
       packages          = find_packages())

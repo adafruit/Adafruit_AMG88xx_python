@@ -194,17 +194,22 @@ class Adafruit_AMG88xx(object):
 		for i in range(0, AMG88xx_PIXEL_ARRAY_SIZE):
 			raw = self._device.readU16(AMG88xx_PIXEL_OFFSET + (i << 1))
 			
-			converted = self.signedMag12ToFloat(raw) * AMG88xx_PIXEL_TEMP_CONVERSION
+			converted = self.twoCompl12(raw) * AMG88xx_PIXEL_TEMP_CONVERSION
 			buf.append(converted)
 			
 		return buf
-	
+
+	def twoCompl12(self, val):
+		if  0x7FF & val == val:
+			return float(val)
+		else:
+			return float(val-4096 )
+
 	def signedMag12ToFloat(self, val):
 		#take first 11 bits as absolute val
-		absVal = (val & 0x7FF)
-		if val & 0x8000:
-			return 0 - float(absVal)
+		if  0x7FF & val == val:
+			return float(val)
 		else:
-			return float(absVal)
+			return  - float(0x7FF & val)
 
 		

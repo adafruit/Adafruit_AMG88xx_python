@@ -27,7 +27,7 @@ classifiers = ['Development Status :: 4 - Beta',
                'Topic :: System :: Hardware']
 
 setup(name              = 'Adafruit_AMG88xx',
-      version           = '1.4.2',
+      version           = '1.4.3',
       author            = 'Dean Miller',
       author_email      = 'dean@adafruit.com',
       description       = 'Python library to use the AMG88xx Grid-EYE 8x8 thermal sensor with raspberry pi or other linux boards.',
